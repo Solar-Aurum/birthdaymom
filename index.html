@@ -12,7 +12,8 @@
         overflow: hidden;
         font-family: 'Comic Sans MS', cursive;
 
-        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+        /* NEW GRADIENT */
+        background: linear-gradient(135deg, #f6d365, #fda085, #fbc2eb);
 
         display: flex;
         justify-content: center;
@@ -25,7 +26,8 @@
     #cake {
         font-size: clamp(90px, 25vw, 160px);
         cursor: pointer;
-        transition: transform 0.1s;
+        transition: transform 0.1s, filter 0.3s;
+        filter: drop-shadow(0 8px 15px rgba(0,0,0,0.2));
     }
 
     #cake:active {
@@ -54,12 +56,13 @@
     #message {
         display: none;
         margin-top: 30px;
-        color: white;
+        color: #fff;
         max-width: 500px;
+        text-shadow: 0 4px 15px rgba(0,0,0,0.25);
     }
 
     .handwriting {
-        font-size: clamp(28px, 7vw, 52px);
+        font-size: clamp(30px, 7vw, 52px);
         border-right: 3px solid white;
         white-space: nowrap;
         overflow: hidden;
