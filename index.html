@@ -7,90 +7,106 @@
 
 <style>
     body {
-        margin: 0;
-        min-height: 100vh;
-        overflow: hidden;
-        font-family: 'Comic Sans MS', cursive;
+    margin: 0;
+    min-height: 100vh;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive;
 
-        /* NEW GRADIENT */
-        background: linear-gradient(135deg, #f6d365, #fda085, #fbc2eb);
+    background: linear-gradient(135deg, #f6d365, #fda085, #fbc2eb);
 
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        text-align: center;
-        padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+}
+
+#cake {
+    font-size: clamp(90px, 25vw, 160px);
+    cursor: pointer;
+    transition: transform 0.1s, filter 0.3s;
+    filter: drop-shadow(0 8px 15px rgba(0,0,0,0.2));
+
+    /* Bounce animation */
+    animation: bounce 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+}
+
+#cake:active {
+    transform: scale(0.9) translateY(0);
+}
+
+.piece {
+    position: absolute;
+    font-size: clamp(18px, 4vw, 28px);
+    pointer-events: none;
+    animation: explode 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
     }
-
-    #cake {
-        font-size: clamp(90px, 25vw, 160px);
-        cursor: pointer;
-        transition: transform 0.1s, filter 0.3s;
-        filter: drop-shadow(0 8px 15px rgba(0,0,0,0.2));
+    30% {
+        transform: translateY(-12px);
     }
-
-    #cake:active {
-        transform: scale(0.9);
+    60% {
+        transform: translateY(-6px);
     }
+}
 
-    .piece {
-        position: absolute;
-        font-size: clamp(18px, 4vw, 28px);
-        pointer-events: none;
-        animation: explode 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
     }
-
-    @keyframes explode {
-        0% {
-            transform: translate(0, 0) scale(1);
-            opacity: 1;
-        }
-        70% { opacity: 1; }
-        100% {
-            transform: translate(var(--x), var(--y)) scale(0.7);
-            opacity: 0;
-        }
+    70% {
+        opacity: 1;
     }
-
-    #message {
-        display: none;
-        margin-top: 30px;
-        color: #fff;
-        max-width: 500px;
-        text-shadow: 0 4px 15px rgba(0,0,0,0.25);
-    }
-
-    .handwriting {
-        font-size: clamp(30px, 7vw, 52px);
-        border-right: 3px solid white;
-        white-space: nowrap;
-        overflow: hidden;
-        width: 0;
-        margin: 0 auto;
-        animation: typing 3s steps(25, end) forwards, blink 0.7s infinite;
-    }
-
-    .subtext {
-        margin-top: 20px;
-        font-size: clamp(16px, 4vw, 22px);
+    100% {
+        transform: translate(var(--x), var(--y)) scale(0.7);
         opacity: 0;
-        animation: fadeIn 2s ease forwards;
-        animation-delay: 3s;
     }
+}
 
-    @keyframes typing {
-        from { width: 0 }
-        to { width: 100% }
-    }
+#message {
+    display: none;
+    margin-top: 30px;
+    color: #fff;
+    max-width: 500px;
+    text-shadow: 0 4px 15px rgba(0,0,0,0.25);
+}
 
-    @keyframes blink {
-        50% { border-color: transparent }
-    }
+.handwriting {
+    font-size: clamp(30px, 7vw, 52px);
+    border-right: 3px solid white;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+    margin: 0 auto;
+    animation: typing 3s steps(25, end) forwards, blink 0.7s infinite;
+}
 
-    @keyframes fadeIn {
-        to { opacity: 1; }
-    }
+.subtext {
+    margin-top: 20px;
+    font-size: clamp(16px, 4vw, 22px);
+    opacity: 0;
+    animation: fadeIn 2s ease forwards;
+    animation-delay: 3s;
+}
+
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes blink {
+    50% { border-color: transparent }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
 </style>
 </head>
 
