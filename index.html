@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday Mom ❤️</title>
+
+<style>
+    body {
+        margin: 0;
+        min-height: 100vh;
+        overflow: hidden;
+        font-family: 'Comic Sans MS', cursive;
+
+        background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        text-align: center;
+        padding: 20px;
+    }
+
+    #cake {
+        font-size: clamp(90px, 25vw, 160px);
+        cursor: pointer;
+        transition: transform 0.1s;
+    }
+
+    #cake:active {
+        transform: scale(0.9);
+    }
+
+    .piece {
+        position: absolute;
+        font-size: clamp(18px, 4vw, 28px);
+        pointer-events: none;
+        animation: explode 2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    }
+
+    @keyframes explode {
+        0% {
+            transform: translate(0, 0) scale(1);
+            opacity: 1;
+        }
+        70% { opacity: 1; }
+        100% {
+            transform: translate(var(--x), var(--y)) scale(0.7);
+            opacity: 0;
+        }
+    }
+
+    #message {
+        display: none;
+        margin-top: 30px;
+        color: white;
+        max-width: 500px;
+    }
+
+    .handwriting {
+        font-size: clamp(28px, 7vw, 52px);
+        border-right: 3px solid white;
+        white-space: nowrap;
+        overflow: hidden;
+        width: 0;
+        margin: 0 auto;
+        animation: typing 3s steps(25, end) forwards, blink 0.7s infinite;
+    }
+
+    .subtext {
+        margin-top: 20px;
+        font-size: clamp(16px, 4vw, 22px);
+        opacity: 0;
+        animation: fadeIn 2s ease forwards;
+        animation-delay: 3s;
+    }
+
+    @keyframes typing {
+        from { width: 0 }
+        to { width: 100% }
+    }
+
+    @keyframes blink {
+        50% { border-color: transparent }
+    }
+
+    @keyframes fadeIn {
+        to { opacity: 1; }
+    }
+</style>
+</head>
+
+<body>
+
+<div id="cake">🎂</div>
+
+<div id="message">
+    <div class="handwriting">Happy Birthday Mom ❤️</div>
+    <div class="subtext">I love you, I wish you so much happiness and an amazing year!</div>
+</div>
+
+<script>
+    let clicks = 0;
+    const cake = document.getElementById("cake");
+    const message = document.getElementById("message");
+
+    cake.addEventListener("click", () => {
+        clicks++;
+        explodeCake();
+
+        if (clicks >= 5) {
+            cake.style.display = "none";
+            message.style.display = "block";
+            cheer();
+        }
+    });
+
+    function explodeCake() {
+        const maxDistance = Math.max(window.innerWidth, window.innerHeight);
+        const count = Math.floor((window.innerWidth * window.innerHeight) / 12000);
+
+        for (let i = 0; i < count; i++) {
+            let piece = document.createElement("div");
+            piece.className = "piece";
+            piece.innerHTML = "🍰";
+
+            let angle = Math.random() * 2 * Math.PI;
+            let distance = maxDistance * (0.6 + Math.random() * 0.5);
+
+            let x = Math.cos(angle) * distance;
+            let y = Math.sin(angle) * distance;
+
+            piece.style.setProperty('--x', x + "px");
+            piece.style.setProperty('--y', y + "px");
+
+            piece.style.left = (window.innerWidth / 2) + "px";
+            piece.style.top = (window.innerHeight / 2) + "px";
+
+            document.body.appendChild(piece);
+            setTimeout(() => piece.remove(), 2000);
+        }
+    }
+
+    function cheer() {
+        for (let i = 0; i < 120; i++) {
+            let confetti = document.createElement("div");
+            confetti.className = "piece";
+            confetti.innerHTML = ["🎉","✨","💖","🎊"][Math.floor(Math.random()*4)];
+
+            let angle = Math.random() * 2 * Math.PI;
+            let distance = Math.max(window.innerWidth, window.innerHeight);
+
+            confetti.style.setProperty('--x', Math.cos(angle)*distance + "px");
+            confetti.style.setProperty('--y', Math.sin(angle)*distance + "px");
+
+            confetti.style.left = (window.innerWidth / 2) + "px";
+            confetti.style.top = (window.innerHeight / 2) + "px";
+
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 2200);
+        }
+
+        let audio = new Audio("https://www.soundjay.com/human/applause-8.mp3");
+        audio.play().catch(() => {});
+    }
+</script>
+
+</body>
+</html>
